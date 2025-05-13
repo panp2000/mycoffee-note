@@ -1,54 +1,165 @@
-# React + TypeScript + Vite
+# MyCoffee Note
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![MyCoffee Note Logo](./docs/assets/logo-placeholder.png)
 
-Currently, two official plugins are available:
+## プロジェクト概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+MyCoffee Noteは、コーヒー愛好家のためのレシピ管理・評価アプリケーションです。さまざまな抽出方法に対応した詳細パラメータの記録と、シンプルな評価システムにより、お気に入りの味を再現可能にします。「いつもの味を、いつでも。」をコンセプトに、あなたのコーヒージャーニーをサポートします。
 
-## Expanding the ESLint configuration
+### 核心価値
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **抽出方法別パラメータ記録**: ドリップ、エスプレッソなど様々な抽出方法に対応
+- **シンプルな評価システム**: 直感的な星評価と風味メモ
+- **使いやすいレシピ管理**: 検索・フィルターによる簡単なレシピ閲覧
+- **いつでもアクセス**: Web対応で様々なデバイスから利用可能
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 開発情報
+
+### 技術スタック
+
+- **フロントエンド**: Vite + React + TypeScript
+- **UI**: shadcn/ui (Tailwind CSS)
+- **ルーティング**: React Router
+- **状態管理**: React Context API → Zustand (拡張フェーズ)
+- **データフェッチング**: TanStack Query (拡張フェーズ)
+- **バックエンド**: Supabase (Auth, DB, Storage)
+- **デプロイ**: Vercel
+
+### 開発環境セットアップ
+
+1. リポジトリをクローン:
+```bash
+git clone https://github.com/your-username/mycoffee-note.git
+cd mycoffee-note
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. 依存関係のインストール:
+```bash
+npm install
 ```
+
+3. 環境変数の設定:
+   - `.env.local` ファイルを作成:
+   ```
+   VITE_SUPABASE_URL=あなたのSupabase URL
+   VITE_SUPABASE_ANON_KEY=あなたのSupabase Anon Key
+   ```
+
+4. 開発サーバーの起動:
+```bash
+npm run dev
+```
+
+5. ブラウザでアクセス:
+```
+http://localhost:5173
+```
+
+詳細な環境構築手順については、[開発環境セットアップガイド](./docs/02_development/開発環境セットアップガイド.md)を参照してください。
+
+## ドキュメント
+
+詳細な開発ガイドとドキュメント:
+
+### 計画・仕様
+
+- [改訂開発計画仕様書](./docs/01_project_plan/改訂開発計画仕様書.md)
+- [簡略化データモデル仕様書](./docs/01_project_plan/簡略化データモデル仕様書.md)
+- [開発マイルストーンチェックリスト](./docs/01_project_plan/開発マイルストーンチェックリスト.md)
+
+### 開発ガイド
+
+- [初心者向け実装ガイド (第1部: 環境設定とプロジェクト初期化)](./docs/02_development/初心者向け実装ガイド_part1.md)
+- [初心者向け実装ガイド (第2部: 基本コンポーネントと認証機能の実装)](./docs/02_development/初心者向け実装ガイド_part2.md)
+- [初心者向け実装ガイド (第3部: レシピ関連機能の実装)](./docs/02_development/初心者向け実装ガイド_part3.md)
+- [初心者向け実装ガイド (第4部: トラブルシューティングと次のステップ)](./docs/02_development/初心者向け実装ガイド_part4.md)
+
+### テスト関連
+
+- [テスト計画書](./docs/03_testing/テスト計画書.md)
+
+### 将来計画
+
+- [改訂版将来展望・拡張計画](./docs/04_future/改訂版将来展望・拡張計画.md)
+
+## プロジェクト構造
+
+```
+.
+├── public/                  # 静的ファイル
+├── src/                     # ソースコード
+│   ├── assets/              # 画像、フォントなど
+│   ├── components/          # 再利用可能なコンポーネント
+│   │   ├── auth/            # 認証関連コンポーネント
+│   │   ├── common/          # 共通コンポーネント
+│   │   ├── layout/          # レイアウトコンポーネント
+│   │   └── recipe/          # レシピ関連コンポーネント
+│   ├── hooks/               # カスタムフック
+│   │   ├── auth/            # 認証関連フック
+│   │   ├── form/            # フォーム関連フック
+│   │   └── data/            # データ取得/操作フック
+│   ├── lib/                 # ユーティリティ
+│   │   ├── supabase.ts      # Supabase設定
+│   │   └── api/             # API関連機能
+│   ├── pages/               # ページコンポーネント
+│   │   ├── auth/            # 認証関連ページ
+│   │   └── recipes/         # レシピ関連ページ
+│   ├── types/               # TypeScript型定義
+│   └── App.tsx              # メインアプリコンポーネント
+├── docs/                    # ドキュメント
+├── .env.example             # 環境変数テンプレート
+├── index.html               # エントリーポイント
+├── package.json             # 依存関係定義
+├── tsconfig.json            # TypeScript設定
+└── vite.config.ts           # Vite設定
+```
+
+## 開発ワークフロー
+
+1. 機能ブランチを作成: `git checkout -b feature/機能名`
+2. 変更を実装
+3. テストを実行: `npm run test`
+4. 変更をコミット: `git commit -m "機能: 変更の説明"`
+5. プルリクエストを作成
+
+## 品質基準
+
+- **コードスタイル**: ESLintとPrettierを使用して一貫したスタイルを維持
+- **コンポーネント設計**: 単一責任の原則に従った小さなコンポーネント
+- **テスト**: 主要機能の手動テスト、可能であれば自動テスト
+- **アクセシビリティ**: 基本的なWCAG準拠
+- **パフォーマンス**: 初期ロード3秒以内、スムーズなインタラクション
+
+## 開発スケジュール
+
+プロジェクトは5つのスプリント（各2週間）で構成される10週間の開発計画に従います：
+
+- **スプリント1**: プロジェクト基盤構築（第1-2週）
+- **スプリント2**: 認証と基本データモデル（第3-4週）
+- **スプリント3**: レシピ基本機能（第5-6週）
+- **スプリント4**: 抽出方法パラメータと評価（第7-8週）
+- **スプリント5**: UI改善とデプロイ（第9-10週）
+
+詳細は[開発マイルストーンチェックリスト](./docs/01_project_plan/開発マイルストーンチェックリスト.md)を参照してください。
+
+## コントリビューション
+
+このプロジェクトはMVP開発中の初心者向けプロジェクトです。コントリビューションを検討される場合は、以下のガイドラインに従ってください：
+
+1. 初心者向けのシンプルな実装を優先
+2. 複雑なライブラリの追加は慎重に検討
+3. コードには適切なコメントを付け、理解しやすさを重視
+4. プルリクエストには詳細な説明を付与
+
+## ライセンス
+
+このプロジェクトは [MIT ライセンス](LICENSE) の下で公開されています。
+
+## 連絡先
+
+- **プロジェクト管理者**: [管理者名](mailto:email@example.com)
+- **技術サポート**: [サポート担当](mailto:support@example.com)
+
+---
+
+Made with ☕ by the MyCoffee Note Team
